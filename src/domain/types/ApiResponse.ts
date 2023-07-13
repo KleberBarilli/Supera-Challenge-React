@@ -7,4 +7,6 @@ export interface ApiResponse {
   totalElements: number;
   totalPages: number;
   last: boolean;
+  saldoTotal: number;
+  saldoNoPeriodo: number;
 }
