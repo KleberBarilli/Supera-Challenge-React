@@ -120,79 +120,78 @@ export const TransferenciasTablePagination: any = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="py-3 px-4 text-left border border-black">
-                Saldo Total: {toCurrency(saldoTotal)}
-              </th>
-              <th className="py-3 px-4 text-left border border-black">
-                Saldo no período: {toCurrency(saldoNoPeriodo)}
-              </th>
-            </tr>
-            <tr>
-              <th className="py-3 px-4 text-left border border-black">Dados</th>
-              <th className="py-3 px-4 text-left border border-black">
-                Valentia
-              </th>
-              <th className="py-3 px-4 text-left border border-black">Tipo</th>
-              <th className="py-3 px-4 text-left border border-black">
-                Nome do operador transacionado
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {transferencias &&
-              transferencias.map((transferencia) => (
-                <tr key={transferencia.id}>
-                  <td className="py-3 px-4 border border-black">
-                    {dateFormatToDDMMYYYY(transferencia.dataTransferencia)}
-                  </td>
-                  <td className="py-3 px-4 border border-black">
-                    {toCurrency(transferencia.valor)}
-                  </td>
-                  <td className="py-3 px-4 border border-black">
-                    {transferencia.tipo}
-                  </td>
-                  <td className="py-3 px-4 border border-black">
-                    {transferencia.nomeOperadorTransacao}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div>
-        {pageNumber > 0 && (
-          <button onClick={() => setPageNumber(pageNumber - 1)}>{"<"}</button>
-        )}
-        {pageNumbers.map((item) => (
-          <span
-            key={item}
-            onClick={() => setPageNumber(item)}
-            aria-current="page"
-            hidden={isLast}
-            className={`relative z-10 inline-flex items-center cursor-pointer px-4 ${
-              pageNumber === item
-                ? "bg-black text-white"
-                : "bg-white text-black border-white hover:bg-white focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-white"
-            } px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-black`}
-          >
-            {item + 1}
-          </span>
-        ))}
-
-        {pageNumber <
-          Math.ceil(transferencias && transferencias.length / totalPages) && (
-          <button
-            className="px-2"
-            onClick={() => setPageNumber(pageNumber + 1)}
-          >
-            {">"}
-          </button>
+        {transferencias.length ? (
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th className="py-3 px-4 text-left border border-black">
+                  Saldo Total: {toCurrency(saldoTotal)}
+                </th>
+                <th className="py-3 px-4 text-left border border-black">
+                  Saldo no período: {toCurrency(saldoNoPeriodo)}
+                </th>
+              </tr>
+              <tr>
+                <th className="py-3 px-4 text-left border border-black">
+                  Dados
+                </th>
+                <th className="py-3 px-4 text-left border border-black">
+                  Valentia
+                </th>
+                <th className="py-3 px-4 text-left border border-black">
+                  Tipo
+                </th>
+                <th className="py-3 px-4 text-left border border-black">
+                  Nome do operador transacionado
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {transferencias &&
+                transferencias.map((transferencia) => (
+                  <tr key={transferencia.id}>
+                    <td className="py-3 px-4 border border-black">
+                      {dateFormatToDDMMYYYY(transferencia.dataTransferencia)}
+                    </td>
+                    <td className="py-3 px-4 border border-black">
+                      {toCurrency(transferencia.valor)}
+                    </td>
+                    <td className="py-3 px-4 border border-black">
+                      {transferencia.tipo}
+                    </td>
+                    <td className="py-3 px-4 border border-black">
+                      {transferencia.nomeOperadorTransacao}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="text-center text-gray-500 mt-4">
+            Nenhum dado encontrado!!
+          </div>
         )}
       </div>
+
+      {transferencias.length ? (
+        <div>
+          {pageNumbers.map((item) => (
+            <span
+              key={item}
+              onClick={() => setPageNumber(item)}
+              aria-current="page"
+              hidden={isLast}
+              className={`relative z-10 inline-flex items-center cursor-pointer px-4 ${
+                pageNumber === item
+                  ? "bg-orange-500 text-white"
+                  : "bg-white text-black border-white hover:bg-white focus:z-20 focus:outline-offset-0 ring-1 ring-inset ring-white"
+              } px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-black`}
+            >
+              {item + 1}
+            </span>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };
