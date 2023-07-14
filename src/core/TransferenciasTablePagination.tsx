@@ -89,6 +89,7 @@ export const TransferenciasTablePagination: any = () => {
             className="form-input text-black"
             onChange={(e) => setDataFim(e.target.value)}
             value={dataFim}
+            disabled={!dataInicio}
           />
         </div>
         <div className="flex flex-col">
@@ -103,7 +104,7 @@ export const TransferenciasTablePagination: any = () => {
       </div>
       <div className="flex justify-end w-full my-16">
         <button
-          className="py-1.5 flex justify-center items-center px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-400 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600"
+          className="py-1.5 flex justify-center items-center px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-400 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 disabled:bg-gray-400"
           onClick={() =>
             search({
               dataInicio: new Date(dataInicio),
@@ -111,6 +112,7 @@ export const TransferenciasTablePagination: any = () => {
               nomeOperadorTransacao: nomeOperadorTransacionado,
             })
           }
+          disabled={!dataFim && !!dataInicio}
         >
           Pesquisar
         </button>
