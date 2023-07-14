@@ -2,6 +2,7 @@ import { ISearch } from "@/domain/types/Search";
 import { Transferencia } from "@/domain/types/Transferencia";
 import { getTransferencias } from "@/pages/api";
 import { dateFormatToDDMMYYYY } from "@/utils/dateFormat";
+import { toCurrency } from "@/utils/toCurrency";
 import React, { useEffect, useState } from "react";
 
 export const TransferenciasTablePagination: any = () => {
@@ -123,10 +124,10 @@ export const TransferenciasTablePagination: any = () => {
           <thead>
             <tr>
               <th className="py-3 px-4 text-left border border-black">
-                Saldo Total: R${saldoTotal}
+                Saldo Total: {toCurrency(saldoTotal)}
               </th>
               <th className="py-3 px-4 text-left border border-black">
-                Saldo no período: R${saldoNoPeriodo}
+                Saldo no período: {toCurrency(saldoNoPeriodo)}
               </th>
             </tr>
             <tr>
@@ -148,7 +149,7 @@ export const TransferenciasTablePagination: any = () => {
                     {dateFormatToDDMMYYYY(transferencia.dataTransferencia)}
                   </td>
                   <td className="py-3 px-4 border border-black">
-                    {transferencia.valor}
+                    {toCurrency(transferencia.valor)}
                   </td>
                   <td className="py-3 px-4 border border-black">
                     {transferencia.tipo}
