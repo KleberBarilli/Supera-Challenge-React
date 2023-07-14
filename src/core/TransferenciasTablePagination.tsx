@@ -94,7 +94,7 @@ export const TransferenciasTablePagination: any = () => {
           />
         </div>
         <div className="flex flex-col">
-          <label>Nome operador transacionado</label>
+          <label>Nome do operador transacionado</label>
           <input
             type="text"
             className="form-input text-black"
